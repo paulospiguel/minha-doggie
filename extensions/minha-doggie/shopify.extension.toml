@@ -1,0 +1,70 @@
+# Minha DOGGIE — Customer Account UI Extension (página completa)
+# Documentação: https://shopify.dev/docs/api/customer-account-ui-extensions/2026-10
+#
+# Versão estável mais recente à data (out. 2026). Tem de coincidir com
+# CUSTOMER_ACCOUNT_API_VERSION em src/constants.ts.
+api_version = "2026-10"
+
+[[extensions]]
+name = "Minha DOGGIE"
+handle = "minha-doggie"
+type = "ui_extension"
+uid = "cd25a4a2-6bf2-bf1b-d9fb-c09f429748380d851b77"
+# O `uid` é gerado pela Shopify CLI no primeiro `shopify app deploy`
+# (ou `shopify app config link`). Não inventar.
+
+# Uma extensão de página completa NÃO pode partilhar a extensão com outros targets.
+[[extensions.targeting]]
+module = "./src/MinhaDoggie.tsx"
+target = "customer-account.page.render"
+
+# Permite adicionar a página ao menu da conta / da loja (é o valor por omissão,
+# declarado explicitamente para documentação).
+[extensions.targeting.capabilities]
+allow_direct_linking = true
+
+# Nota: não é pedido `network_access` (não há backend) nem `api_access`
+# (Storefront API não é usada). A Customer Account API é acedida via
+# fetch('shopify://customer-account/api/<versão>/graphql.json'), sem token.
+
+[extensions.settings]
+
+[[extensions.settings.fields]]
+key = "hero_image_url"
+type = "single_line_text_field"
+name = "Imagem de boas-vindas (URL HTTPS)"
+description = "Opcional. URL HTTPS de uma imagem de cão e gato carregada em Conteúdo → Ficheiros. Proporção 2:1, idealmente ≥ 1600×800 px."
+
+  [[extensions.settings.fields.validations]]
+  name = "max"
+  value = "500"
+
+[[extensions.settings.fields]]
+key = "hero_image_alt"
+type = "single_line_text_field"
+name = "Texto alternativo da imagem"
+description = "Opcional. Descrição acessível da imagem (por omissão: «Um cão e um gato DOGGIE»)."
+
+  [[extensions.settings.fields.validations]]
+  name = "max"
+  value = "120"
+
+[[extensions.settings.fields]]
+key = "subscriptions_url"
+type = "single_line_text_field"
+name = "Gestão de subscrições (URL HTTPS)"
+description = "Opcional. Página oficial da app de subscrições da DOGGIE. Se vazio, mostra-se um estado vazio."
+
+  [[extensions.settings.fields.validations]]
+  name = "max"
+  value = "500"
+
+[[extensions.settings.fields]]
+key = "store_url"
+type = "single_line_text_field"
+name = "Loja (URL HTTPS do botão «Voltar a comprar»)"
+description = "Opcional. Por omissão: https://store.doggie.pt"
+
+  [[extensions.settings.fields.validations]]
+  name = "max"
+  value = "300"

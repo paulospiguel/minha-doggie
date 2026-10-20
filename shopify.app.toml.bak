@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "2446c372531daf625f08fc62b6b0a0bb"
+name = "Minha DOGGIE"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2027-01"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_customers"
+
+[auth]
+redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+[customer.metafields.app.pets]
+type = "json"
+name = "Companheiros (Minha DOGGIE)"
+description = "Animais registados voluntariamente pelo cliente na Minha DOGGIE: nome, espécie, raça e idade aproximada."
+
+  [customer.metafields.app.pets.access]
+  customer_account = "read_write"
+  admin = "merchant_read"

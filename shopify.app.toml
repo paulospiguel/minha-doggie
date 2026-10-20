@@ -1,0 +1,48 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "2446c372531daf625f08fc62b6b0a0bb"
+name = "Minha DOGGIE"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2027-01"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "customer_read_customers,customer_write_customers,customer_read_orders,write_customers"
+
+[auth]
+redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+[customer.metafields.app.pets]
+type = "json"
+name = "Companheiros (Minha DOGGIE)"
+description = "Animais registados voluntariamente pelo cliente na Minha DOGGIE: nome, espécie, raça e idade aproximada."
+
+  [customer.metafields.app.pets.access]
+  customer_account = "read_write"
+  admin = "merchant_read"
+
+# Índices derivados de `pets` para segmentos nativos de clientes (Clientes › Segmentos).
+# Escritos SEMPRE na mesma chamada metafieldsSet que `pets` (conta de cliente e bloco do admin).
+[customer.metafields.app.pet_species]
+type = "list.single_line_text_field"
+name = "Espécies dos companheiros (Minha DOGGIE)"
+description = "Derivado automaticamente de Companheiros: 'cao' e/ou 'gato'. Usado em segmentos."
+access.customer_account = "read_write"
+access.admin = "merchant_read"
+validations.choices = ["cao", "gato"]
+
+[customer.metafields.app.pet_count]
+type = "number_integer"
+name = "Número de companheiros (Minha DOGGIE)"
+description = "Derivado automaticamente de Companheiros. Usado em segmentos."
+access.customer_account = "read_write"
+access.admin = "merchant_read"
+validations.min = 0
+validations.max = 12

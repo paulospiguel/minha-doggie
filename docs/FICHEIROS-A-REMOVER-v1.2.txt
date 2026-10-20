@@ -1,0 +1,7 @@
+# Minha DOGGIE v1.2 — ficheiros a REMOVER da cópia local antes/depois de extrair minha-doggie-update2.tar.gz
+# (movidos para o pacote partilhado packages/core)
+extensions/minha-doggie/src/lib/pets.ts
+extensions/minha-doggie/src/lib/text.ts
+extensions/minha-doggie/tests/pets.test.ts
+# (se ainda existir da v1.0)
+extensions/minha-doggie/src/components/DeletePetModal.tsx

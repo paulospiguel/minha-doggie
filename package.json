@@ -1,0 +1,41 @@
+{
+  "name": "minha-doggie",
+  "version": "1.2.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Minha DOGGIE — página de cliente (Customer Account UI Extension) e ferramentas de admin (Admin UI Extensions) para store.doggie.pt",
+  "workspaces": [
+    "packages/*",
+    "extensions/*"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "shopify": "shopify",
+    "info": "shopify app info",
+    "build": "shopify app build",
+    "dev": "shopify app dev",
+    "deploy": "shopify app deploy",
+    "typecheck": "tsc --noEmit --project packages/core/tsconfig.json && tsc --noEmit --project extensions/minha-doggie/tsconfig.json && tsc --noEmit --project extensions/minha-doggie-admin/tsconfig.json",
+    "lint": "eslint packages/core extensions/minha-doggie extensions/minha-doggie-admin",
+    "test": "vitest run",
+    "bundle:check": "node scripts/bundle-check.mjs",
+    "validate:graphql": "node scripts/validate-graphql.mjs",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run bundle:check && npm run validate:graphql"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^4",
+    "@shopify/ui-extensions-tester": "2026.10.x",
+    "@testing-library/preact": "^3.2.4",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0",
+    "@eslint/js": "^9.0.0",
+    "typescript-eslint": "^8.0.0",
+    "graphql": "^16.9.0",
+    "jsdom": "^25.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  },
+  "type": "module"
+}

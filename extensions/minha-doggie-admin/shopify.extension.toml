@@ -1,0 +1,42 @@
+# Minha DOGGIE — Admin UI Extensions (equipa DOGGIE)
+# Documentação: https://shopify.dev/docs/api/admin-extensions/2026-10
+#
+# Sem backend: todas as chamadas usam o Direct API Access
+# (fetch('shopify:admin/api/graphql.json')), autenticado pela Shopify com a
+# sessão do membro da equipa (modo online por omissão): só funciona para quem
+# tem permissões de Clientes no admin. Não há tokens no código.
+api_version = "2026-10"
+
+[[extensions]]
+name = "Minha DOGGIE (admin)"
+handle = "minha-doggie-admin"
+uid = "99ca10ab-1820-1dfc-800a-cd626084f380917bbd2d"
+type = "ui_extension"
+# O `uid` é gerado pela Shopify CLI no primeiro `shopify app deploy`. Não inventar.
+
+# 1) Bloco na página de detalhe do cliente: ver/adicionar/editar/remover companheiros.
+[[extensions.targeting]]
+module = "./src/CustomerPetsBlock.tsx"
+target = "admin.customer-details.block.render"
+
+# 2) Ação na lista de clientes: ferramentas gerais
+[[extensions]]
+name = "Minha DOGGIE (ferramentas)"
+handle = "minha-doggie-admin-tools"
+uid = "fd1fc68e-cf76-d9b7-ebb2-2bae8bf34635e1ddb16e"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/CustomerTools.tsx"
+target = "admin.customer-index.action.render"
+
+# 3) Ação em lote na lista de clientes: exportar selecionados
+[[extensions]]
+name = "Minha DOGGIE (exportação)"
+handle = "minha-doggie-admin-export"
+uid = "1f9e90f8-d318-b2a0-b9aa-0092f2ae820a289800e3"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/CustomerSelectionExport.tsx"
+target = "admin.customer-index.selection-action.render"

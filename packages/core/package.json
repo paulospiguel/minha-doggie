@@ -1,0 +1,12 @@
+{
+  "name": "@minha-doggie/core",
+  "private": true,
+  "version": "1.2.0",
+  "license": "UNLICENSED",
+  "description": "Lógica partilhada da Minha DOGGIE (validação/serialização de companheiros, índices de segmentação, CSV, paginação). Sem dependências e sem acesso a globais da plataforma.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

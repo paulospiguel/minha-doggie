@@ -1,0 +1,115 @@
+import {PET_COPY} from '@minha-doggie/core';
+
+/** Todos os textos visíveis da Minha DOGGIE, em português de Portugal. */
+export const COPY = {
+  page: {
+    /** Título da página = saudação (o maior nível de título disponível). */
+    greeting: (firstName: string | null) => (firstName ? `Olá, ${firstName}!` : 'Olá!'),
+    /** Linguagem neutra (sem "Bem-vindo/a"). */
+    subheading: 'Esta é a tua área DOGGIE.',
+    slogan: 'Much more than a pet!',
+  },
+  welcome: {
+    label: 'Boas-vindas',
+    intro: 'Tudo o que precisas para cuidar de quem te faz mais feliz.',
+    manageProfile: 'Gerir perfil',
+    shopAgain: 'Voltar a comprar',
+    defaultImageAlt: 'Um cão e um gato DOGGIE',
+  },
+  pets: {
+    heading: 'Os meus companheiros',
+    add: 'Adicionar +',
+    addAccessibility: 'Adicionar companheiro',
+    addLong: 'Adicionar companheiro',
+    loading: 'A carregar os teus companheiros…',
+    emptyTitle: 'Ainda não tens companheiros registados',
+    emptyBody: 'Adiciona o teu cão ou gato para termos tudo à mão quando precisares.',
+    editAccessibility: (name: string) => `Ver e editar ${name}`,
+    limitReached: PET_COPY.limitReached,
+    discarded: 'Alguns registos antigos estavam incompletos e não são mostrados.',
+    loadError: 'Não foi possível carregar os teus companheiros. Tenta novamente mais tarde.',
+    corrupted:
+      'Os dados dos teus companheiros não puderam ser lidos. Para evitar perder informação, as alterações estão temporariamente bloqueadas. Contacta-nos se o problema persistir.',
+    retry: 'Tentar novamente',
+    species: PET_COPY.species,
+    ageUnit: PET_COPY.ageUnit,
+    age: PET_COPY.age,
+    privacy:
+      'Usamos estes dados apenas para personalizar a tua experiência DOGGIE. Podes editá-los ou removê-los a qualquer momento.',
+  },
+  petForm: {
+    headingNew: 'Adicionar companheiro',
+    headingEdit: 'Editar companheiro',
+    name: 'Nome',
+    species: 'Espécie',
+    breed: 'Raça (opcional)',
+    breedPlaceholder: 'Ex.: Labrador, Europeu Comum, SRD',
+    ageValue: 'Idade aproximada (opcional)',
+    ageUnit: 'Unidade',
+    save: 'Guardar',
+    cancel: 'Cancelar',
+    remove: 'Remover companheiro',
+    saved: 'Companheiro guardado.',
+    updated: 'Alterações guardadas.',
+  },
+  petDelete: {
+    heading: 'Remover companheiro?',
+    body: (name: string) =>
+      `Vais remover ${name} da tua conta. Esta ação não pode ser anulada.`,
+    confirm: 'Remover',
+    cancel: 'Manter',
+    removed: 'Companheiro removido.',
+  },
+  validation: PET_COPY.validation,
+  saveErrors: {
+    generic: 'Não foi possível guardar. Verifica a ligação e tenta novamente.',
+    conflict:
+      'Os teus companheiros foram alterados noutra janela. Atualizámos a lista — confirma e tenta de novo.',
+    notReady: 'Ainda estamos a carregar a tua conta. Tenta novamente dentro de instantes.',
+    blocked: 'As alterações estão temporariamente indisponíveis.',
+  },
+  subscriptions: {
+    heading: 'Subscrições',
+    configuredTitle: 'Entregas recorrentes',
+    configuredBody: 'Consulta e gere as entregas recorrentes da tua conta no portal de subscrições.',
+    manage: 'Gerir subscrição ›',
+    manageAccessibility: 'Gerir subscrição (abre o portal de subscrições)',
+    emptyTitle: 'Sem subscrições para mostrar',
+    emptyBody: 'Quando a gestão de compras recorrentes estiver disponível, vais encontrá-la aqui.',
+  },
+  orders: {
+    heading: 'Últimas encomendas',
+    viewAll: 'Ver todas ›',
+    viewAllAccessibility: 'Ver todas as encomendas',
+    loading: 'A carregar as tuas encomendas…',
+    emptyTitle: 'Ainda não tens encomendas',
+    emptyBody: 'Quando fizeres a tua primeira compra, vais vê-la aqui.',
+    startShopping: 'Começar a comprar',
+    error: 'Não foi possível carregar as encomendas recentes.',
+    errorAction: 'Ver histórico completo',
+    detailAccessibility: (name: string) => `Ver detalhe da encomenda ${name}`,
+    status: {
+      FULFILLED: 'Enviada',
+      PARTIALLY_FULFILLED: 'Envio parcial',
+      IN_PROGRESS: 'Em preparação',
+      OPEN: 'Em preparação',
+      UNFULFILLED: 'Por enviar',
+      PENDING_FULFILLMENT: 'Pendente',
+      SCHEDULED: 'Agendada',
+      ON_HOLD: 'Em espera',
+      RESTOCKED: 'Devolvida',
+      CANCELLED: 'Cancelada',
+      UNKNOWN: 'Ver estado',
+    },
+  },
+  quickActions: {
+    heading: 'Ações rápidas',
+    /** Sem "reorder" nativo numa extensão: leva ao histórico (onde está "Comprar novamente", se ativo). */
+    orders: {title: 'Ver encomendas', body: 'Consulta o histórico e volta a comprar.'},
+    profile: {title: 'Atualizar morada', body: 'Mantém os teus dados atualizados.'},
+    addPet: {title: 'Adicionar companheiro', body: 'Regista um novo membro da família.'},
+  },
+  account: {
+    loadError: 'Não foi possível carregar a tua conta. Atualiza a página para tentar novamente.',
+  },
+} as const;
