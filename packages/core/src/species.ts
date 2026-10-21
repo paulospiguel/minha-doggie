@@ -9,10 +9,18 @@ import {PET_COUNT_METAFIELD, PET_SPECIES_METAFIELD, PETS_METAFIELD} from './cons
 import {serializePets} from './pets';
 import type {MetafieldIdentifierInput, MetafieldsSetInput, Pet, Species, SpeciesCode} from './types';
 
-export const SPECIES_CODE: Readonly<Record<Species, SpeciesCode>> = {dog: 'cao', cat: 'gato'};
+export const SPECIES_CODE: Readonly<Record<Species, SpeciesCode>> = {
+  dog: 'cao',
+  cat: 'gato',
+  rabbit: 'coelho',
+  ferret: 'furao',
+  reptil: 'reptil',
+  fish: 'peixe',
+  bird: 'ave',
+};
 
 /** Ordem canónica (igual às escolhas da definição em shopify.app.toml). */
-export const SPECIES_CODES: readonly SpeciesCode[] = ['cao', 'gato'];
+export const SPECIES_CODES: readonly SpeciesCode[] = ['cao', 'gato', 'coelho', 'furao', 'ave', 'peixe', 'reptil'];
 
 export interface PetIndex {
   species: SpeciesCode[];

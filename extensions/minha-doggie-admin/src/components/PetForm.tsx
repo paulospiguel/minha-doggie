@@ -1,4 +1,12 @@
-import {PET_COPY, PET_LIMITS, validatePetDraft, type PetDraft, type PetErrors, type ValidPetInput} from '@minha-doggie/core';
+import {
+  PET_COPY,
+  PET_LIMITS,
+  SPECIES_LIST,
+  validatePetDraft,
+  type PetDraft,
+  type PetErrors,
+  type ValidPetInput,
+} from '@minha-doggie/core';
 import {useState} from 'preact/hooks';
 import {ADMIN_COPY} from '../copy';
 import {readValue} from '../lib/events';
@@ -54,8 +62,11 @@ export function PetForm({mode, initialDraft, saving, formError, onSubmit, onCanc
         error={errors.species}
         onChange={(event: Event) => update('species', readValue(event))}
       >
-        <s-option value="dog">{PET_COPY.species.dog}</s-option>
-        <s-option value="cat">{PET_COPY.species.cat}</s-option>
+        {SPECIES_LIST.map((species) => (
+          <s-option key={species} value={species}>
+            {PET_COPY.species[species]}
+          </s-option>
+        ))}
       </s-select>
       <s-text-field
         label={copy.breed}

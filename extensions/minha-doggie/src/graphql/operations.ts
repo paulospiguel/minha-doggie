@@ -15,6 +15,11 @@ export const CUSTOMER_QUERY = /* GraphQL */ `
         compareDigest
       }
     }
+    shop {
+      banner: metafield(namespace: "$app", key: "banner") {
+        value
+      }
+    }
   }
 `;
 

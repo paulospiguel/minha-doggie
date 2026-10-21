@@ -50,6 +50,100 @@ export const ADMIN_COPY = {
     heading: 'Minha DOGGIE',
     close: 'Fechar',
   },
+  home: {
+    heading: 'Minha DOGGIE',
+    customizeCheckout: 'Personalizar página de conta',
+    openCustomers: 'Clientes',
+    openSegments: 'Segmentos',
+    openFiles: 'Ficheiros',
+  },
+  banner: {
+    heading: 'Banner de destaque na conta de cliente',
+    intro:
+      'Carrega aqui a imagem do banner principal da área «Minha DOGGIE» (proporção recomendada 2:1, ≥ 1600×800 px, JPG/PNG/WebP até 5 MB). Quando ativo, substitui a imagem configurada no editor de contas.',
+    loading: 'A carregar configuração do banner…',
+    enabledLabel: 'Mostrar banner na conta de cliente',
+    dropZoneLabel: 'Escolher ou largar imagem do banner (JPG, PNG, WebP)',
+    uploading: 'A enviar e processar a imagem em Conteúdo › Ficheiros…',
+    uploaded: 'Imagem carregada com sucesso. Clica em «Guardar banner» para publicar.',
+    altLabel: 'Texto alternativo da imagem (acessibilidade)',
+    altPlaceholder: 'Ex.: Um cão e um gato DOGGIE',
+    currentImage: 'Imagem selecionada',
+    noImage: 'Nenhuma imagem selecionada.',
+    removeImage: 'Remover imagem',
+    save: 'Guardar banner',
+    saving: 'A guardar…',
+    saved: 'Banner guardado e publicado na conta de cliente.',
+    fileTypeError: 'Formato inválido. Escolhe uma imagem JPG, PNG ou WebP.',
+    fileSizeError: 'A imagem excede o limite de 5 MB.',
+    uploadError: 'Não foi possível enviar a imagem para Conteúdo › Ficheiros.',
+    saveError: 'Não foi possível guardar o banner.',
+    loadError: 'Não foi possível ler a configuração do banner.',
+  },
+  config: {
+    heading: 'Configurações da página «Minha DOGGIE» (Conta de cliente)',
+    subheading: 'Personalização visual e parâmetros da extensão na área de cliente (account.doggie.pt).',
+    intro:
+      'As definições da página de cliente configuram-se no editor nativo de Checkout e contas de cliente (Definições › Checkout › Personalizar › Contas de cliente › página Minha DOGGIE):',
+    settingsList: [
+      {
+        key: 'hero_image_url',
+        label: 'Imagem de boas-vindas (URL HTTPS)',
+        detail:
+          'Opcional. Carregar a fotografia (proporção 2:1, ≥ 1600×800 px) em Conteúdo › Ficheiros, copiar o URL https://cdn.shopify.com/… e colar no editor.',
+      },
+      {
+        key: 'hero_image_alt',
+        label: 'Texto alternativo da imagem',
+        detail: 'Opcional. Descrição acessível da imagem (por omissão: «Um cão e um gato DOGGIE»).',
+      },
+      {
+        key: 'subscriptions_url',
+        label: 'Gestão de subscrições (URL HTTPS)',
+        detail: 'Opcional. URL oficial do portal da app de subscrições da DOGGIE. Se vazio, mostra-se um estado vazio.',
+      },
+      {
+        key: 'store_url',
+        label: 'Loja (URL HTTPS do botão «Voltar a comprar»)',
+        detail: 'Opcional. Por omissão: https://store.doggie.pt.',
+      },
+    ],
+    brandingHeading: 'Identidade visual (Branding no editor de contas)',
+    brandingDetail:
+      'Paleta DOGGIE: #4B0C62 · #92278F (Destaque/Accent) · #DA1C5C (Botão primário) · #EE2A7B · #F15A29 · #FFFFFF (Fundo principal e cabeçalho).',
+    adminLocationsHeading: 'Extensões e locais no Admin',
+    adminLocationsIntro:
+      'Além desta página principal, a app disponibiliza extensões integradas diretamente nas páginas de clientes:',
+    locations: [
+      {
+        handle: 'minha-doggie',
+        title: 'Página na Conta de Cliente (customer-account.page.render)',
+        detail: 'Área «Minha DOGGIE» para o cliente gerir companheiros, ver encomendas e aceder a subscrições.',
+      },
+      {
+        handle: 'minha-doggie-admin',
+        title: 'Bloco na ficha do cliente (admin.customer-details.block.render)',
+        detail: 'Em Clientes › um cliente › Adicionar bloco › «Companheiros (Minha DOGGIE)»: ver, adicionar, editar e remover companheiros.',
+      },
+      {
+        handle: 'minha-doggie-admin-tools',
+        title: 'Mais ações na lista de clientes (admin.customer-index.action.render)',
+        detail: 'Em Clientes › Mais ações › «Minha DOGGIE (ferramentas)»: atalho rápido para exportação CSV, segmentos e reindexação.',
+      },
+      {
+        handle: 'minha-doggie-admin-export',
+        title: 'Ação de seleção na lista de clientes (admin.customer-index.selection-action.render)',
+        detail: 'Em Clientes › selecionar clientes › «Minha DOGGIE (exportação)»: exportar CSV apenas dos clientes selecionados.',
+      },
+    ],
+    statusActive: 'Ativa',
+    statusAvailable: 'Disponível',
+    statusUnavailable: 'Indisponível',
+    openCheckoutEditor: 'Abrir editor de Checkout e contas',
+    openFilesManager: 'Abrir Conteúdo › Ficheiros',
+    openCustomersList: 'Abrir Clientes',
+    openSegmentsList: 'Abrir Segmentos',
+  },
   exporter: {
     heading: 'Exportar companheiros (CSV)',
     headingSelection: 'Exportar companheiros dos clientes selecionados',

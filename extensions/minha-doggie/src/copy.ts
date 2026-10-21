@@ -104,6 +104,8 @@ export const COPY = {
   },
   quickActions: {
     heading: 'Ações rápidas',
+    subheading: 'Atalhos para a tua gestão diária',
+    account: {title: 'Dados da conta', body: 'Gere dados pessoais e segurança.'},
     /** Sem "reorder" nativo numa extensão: leva ao histórico (onde está "Comprar novamente", se ativo). */
     orders: {title: 'Ver encomendas', body: 'Consulta o histórico e volta a comprar.'},
     profile: {title: 'Atualizar morada', body: 'Mantém os teus dados atualizados.'},

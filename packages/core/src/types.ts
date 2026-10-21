@@ -1,8 +1,13 @@
-export type Species = 'dog' | 'cat';
+/**
+ * Espécies disponíveis. Os valores são os do metaobjeto "Pets" da loja
+ * (rabbit, dog, cat, reptil, fish, bird) mais `ferret`; a lista fixa em
+ * `SPECIES_LIST` (pets.ts) tem de ser mantida em linha com esse metaobjeto.
+ */
+export type Species = 'dog' | 'cat' | 'rabbit' | 'ferret' | 'reptil' | 'fish' | 'bird';
 export type AgeUnit = 'years' | 'months';
 
-/** Código guardado em `$app.pet_species` (escolhas da definição: 'cao', 'gato'). */
-export type SpeciesCode = 'cao' | 'gato';
+/** Código guardado em `$app.pet_species` (escolhas da definição em shopify.app.toml). */
+export type SpeciesCode = 'cao' | 'gato' | 'coelho' | 'furao' | 'reptil' | 'peixe' | 'ave';
 
 export interface PetAge {
   value: number;

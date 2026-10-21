@@ -1,6 +1,14 @@
 /** Textos partilhados (pt-PT) usados pela validação e pela descrição de companheiros. */
 export const PET_COPY = {
-  species: {dog: 'Cão', cat: 'Gato'} as const,
+  species: {
+    dog: 'Cão',
+    cat: 'Gato',
+    rabbit: 'Coelho',
+    ferret: 'Furão',
+    bird: 'Ave',
+    fish: 'Peixe',
+    reptil: 'Réptil',
+  } as const,
   ageUnit: {years: 'anos', months: 'meses'} as const,
   age: (value: number, unit: 'years' | 'months') => {
     if (unit === 'months') {
@@ -16,7 +24,7 @@ export const PET_COPY = {
     nameRequired: 'Indica o nome do teu companheiro.',
     nameTooLong: (max: number) => `O nome pode ter no máximo ${max} caracteres.`,
     nameInvalid: 'O nome só pode conter letras, números, espaços, apóstrofos, pontos e hífenes.',
-    speciesInvalid: 'Escolhe se é um cão ou um gato.',
+    speciesInvalid: 'Escolhe o tipo de companheiro.',
     breedTooLong: (max: number) => `A raça pode ter no máximo ${max} caracteres.`,
     breedInvalid: 'A raça só pode conter letras, números, espaços, apóstrofos, pontos, barras e hífenes.',
     ageInvalid: 'Indica a idade com um número inteiro.',

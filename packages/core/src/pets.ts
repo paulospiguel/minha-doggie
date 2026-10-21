@@ -14,7 +14,9 @@ import type {
 } from './types';
 import {sanitizeText, textLength, truncate} from './text';
 
-const SPECIES: readonly Species[] = ['dog', 'cat'];
+/** Ordem de apresentação nos formulários (cão e gato primeiro). */
+export const SPECIES_LIST: readonly Species[] = ['dog', 'cat', 'rabbit', 'ferret', 'bird', 'fish', 'reptil'];
+const SPECIES = SPECIES_LIST;
 const AGE_UNITS: readonly AgeUnit[] = ['years', 'months'];
 const NAME_PATTERN = /^[\p{L}\p{M}\p{N} '’.-]+$/u;
 const BREED_PATTERN = /^[\p{L}\p{M}\p{N} '’.,/()-]+$/u;

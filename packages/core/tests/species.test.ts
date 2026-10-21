@@ -34,7 +34,7 @@ describe('parseSpeciesList / parsePetCount', () => {
     expect(parseSpeciesList('')).toBeNull();
     expect(parseSpeciesList('{oops')).toBeNull();
     expect(parseSpeciesList('"cao"')).toBeNull();
-    expect(parseSpeciesList('["cao","peixe"]')).toBeNull();
+    expect(parseSpeciesList('["cao","dragao"]')).toBeNull();
   });
   it('lê contagens inteiras não negativas', () => {
     expect(parsePetCount('0')).toBe(0);

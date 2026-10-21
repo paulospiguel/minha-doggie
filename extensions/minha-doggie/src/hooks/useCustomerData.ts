@@ -1,3 +1,4 @@
+import {EMPTY_BANNER, type BannerConfig} from '@minha-doggie/core';
 import {useCallback, useEffect, useRef, useState} from 'preact/hooks';
 import {fetchCustomer, PetsConflictError, savePets} from '../graphql/api';
 import type {CustomerProfile, LoadState, Pet, PetsState} from '../types';
@@ -9,6 +10,7 @@ export interface CustomerDataApi {
   profile: LoadState<CustomerProfile>;
   /** 'blocked' = JSON guardado ilegível; leitura apenas. */
   pets: LoadState<PetsState> | {status: 'blocked'};
+  banner: BannerConfig;
   saving: boolean;
   reload: () => Promise<void>;
   persist: (next: Pet[]) => Promise<SaveOutcome>;
@@ -17,6 +19,7 @@ export interface CustomerDataApi {
 export function useCustomerData(): CustomerDataApi {
   const [profile, setProfile] = useState<LoadState<CustomerProfile>>({status: 'loading'});
   const [pets, setPets] = useState<CustomerDataApi['pets']>({status: 'loading'});
+  const [banner, setBanner] = useState<BannerConfig>(EMPTY_BANNER);
   const [saving, setSaving] = useState(false);
   const mounted = useRef(true);
   const savingRef = useRef(false);
@@ -27,6 +30,7 @@ export function useCustomerData(): CustomerDataApi {
       if (!mounted.current) return;
       setProfile({status: 'ready', data: data.profile});
       setPets(data.pets ? {status: 'ready', data: data.pets} : {status: 'blocked'});
+      setBanner(data.banner);
     } catch (error) {
       if (!mounted.current) return;
       const message = error instanceof Error ? error.message : 'unknown';
@@ -70,5 +74,5 @@ export function useCustomerData(): CustomerDataApi {
     [pets, profile, reload],
   );
 
-  return {profile, pets, saving, reload, persist};
+  return {profile, pets, banner, saving, reload, persist};
 }

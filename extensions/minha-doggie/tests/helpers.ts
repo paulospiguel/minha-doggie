@@ -7,6 +7,7 @@ export interface MockState {
   petsValue: string | null;
   digest: string | null;
   orders: unknown[];
+  bannerValue?: string | null;
   ordersError?: boolean;
   customerError?: boolean;
   userErrors?: Array<{field: string[]; message: string; code: string}>;
@@ -37,6 +38,9 @@ export function createApiMock(state: MockState) {
             id: CUSTOMER_GID,
             firstName: state.firstName,
             pets: state.petsValue == null ? null : {value: state.petsValue, compareDigest: state.digest},
+          },
+          shop: {
+            banner: state.bannerValue == null ? null : {value: state.bannerValue},
           },
         },
       });

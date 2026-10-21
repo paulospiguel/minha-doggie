@@ -57,8 +57,8 @@ describe('validatePetDraft', () => {
     expect(html.ok).toBe(false);
   });
 
-  it('rejeita espécies fora de cão/gato', () => {
-    const result = validatePetDraft({...emptyPetDraft(), name: 'Nemo', species: 'fish'});
+  it('rejeita espécies desconhecidas', () => {
+    const result = validatePetDraft({...emptyPetDraft(), name: 'Nemo', species: 'dragon'});
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.errors.species).toBeDefined();
   });
@@ -109,7 +109,7 @@ describe('parsePetsMetafield / serializePets', () => {
   it('descarta registos inválidos e duplicados sem falhar', () => {
     const raw = JSON.stringify({
       version: 1,
-      pets: [pet(), pet(), {id: 'x', name: 'Curto'}, {id: 'cccccccc-0000-4000-8000-000000000003', name: 'Peixe', species: 'fish'}, null, 'texto'],
+      pets: [pet(), pet(), {id: 'x', name: 'Curto'}, {id: 'cccccccc-0000-4000-8000-000000000003', name: 'Peixe', species: 'dragon'}, null, 'texto'],
     });
     const parsed = parsePetsMetafield(raw);
     expect(parsed.pets).toHaveLength(1);

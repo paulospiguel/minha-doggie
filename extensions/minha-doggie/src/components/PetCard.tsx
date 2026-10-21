@@ -11,7 +11,9 @@ interface PetCardProps {
 
 /** Cartão compacto: avatar, nome, espécie · raça, idade e chevron. Abre o modal de edição. */
 export function PetCard({pet, disabled, onOpen}: PetCardProps) {
-  const details = [COPY.pets.species[pet.species], pet.breed].filter(Boolean).join(' · ');
+  const summary = [COPY.pets.species[pet.species], pet.breed, pet.age ? COPY.pets.age(pet.age.value, pet.age.unit) : null]
+    .filter(Boolean)
+    .join(' • ');
   return (
     <s-clickable
       border="base"
@@ -27,8 +29,7 @@ export function PetCard({pet, disabled, onOpen}: PetCardProps) {
         <s-avatar initials={petInitials(pet.name)} alt={pet.name} size="large" />
         <s-stack direction="block" gap="none">
           <s-text type="strong">{pet.name}</s-text>
-          <s-text color="subdued">{details}</s-text>
-          {pet.age ? <s-text color="subdued">{COPY.pets.age(pet.age.value, pet.age.unit)}</s-text> : null}
+          <s-text color="subdued" type="small">{summary}</s-text>
         </s-stack>
         <s-icon type="chevron-right" />
       </s-grid>

@@ -6,7 +6,6 @@ application_url = "https://shopify.dev/apps/default-app-home"
 embedded = true
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
 
 [webhooks]
@@ -14,10 +13,17 @@ api_version = "2027-01"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "customer_read_customers,customer_write_customers,customer_read_orders,write_customers"
+scopes = "customer_read_customers,customer_write_customers,customer_read_orders,write_customers,write_files"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+[shop.metafields.app.banner]
+type = "json"
+name = "Banner da conta de cliente (Minha DOGGIE)"
+description = "Configuração do banner de destaque da página Minha DOGGIE (imagem, texto alternativo e estado ativo)."
+access.admin = "merchant_read_write"
+access.customer_account = "read"
 
 [customer.metafields.app.pets]
 type = "json"
@@ -33,10 +39,10 @@ description = "Animais registados voluntariamente pelo cliente na Minha DOGGIE: 
 [customer.metafields.app.pet_species]
 type = "list.single_line_text_field"
 name = "Espécies dos companheiros (Minha DOGGIE)"
-description = "Derivado automaticamente de Companheiros: 'cao' e/ou 'gato'. Usado em segmentos."
+description = "Derivado automaticamente de Companheiros: cao, gato, coelho, furao, ave, peixe e/ou reptil. Usado em segmentos."
 access.customer_account = "read_write"
 access.admin = "merchant_read"
-validations.choices = ["cao", "gato"]
+validations.choices = ["cao", "gato", "coelho", "furao", "ave", "peixe", "reptil"]
 
 [customer.metafields.app.pet_count]
 type = "number_integer"

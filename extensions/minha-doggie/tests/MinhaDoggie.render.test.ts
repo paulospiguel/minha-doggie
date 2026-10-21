@@ -120,6 +120,24 @@ describe('boas-vindas', () => {
     expect(prop(image, 'objectFit')).toBe('cover');
     expect(prop(document.body.querySelector('s-section s-grid')!, 'background')).toBeUndefined();
   });
+
+  it('mostra o banner configurado no Admin ($app.banner) quando ativo', async () => {
+    setup(
+      baseState({
+        bannerValue: JSON.stringify({
+          version: 1,
+          enabled: true,
+          imageUrl: 'https://cdn.shopify.com/s/files/1/banner-admin.jpg',
+          alt: 'Banner configurado no painel',
+        }),
+      }),
+    );
+    await extension.render();
+    await waitFor(() => expect(document.body.querySelector('s-image')).not.toBeNull());
+    const image = document.body.querySelector('s-image')!;
+    expect(prop(image, 'src')).toBe('https://cdn.shopify.com/s/files/1/banner-admin.jpg');
+    expect(prop(image, 'alt')).toBe('Banner configurado no painel');
+  });
 });
 
 describe('companheiros', () => {
@@ -133,7 +151,7 @@ describe('companheiros', () => {
     setup(baseState({petsValue: JSON.stringify({version: 1, pets: [STORED_PET]}), digest: 'd1'}));
     await extension.render();
     await waitFor(() => expect(text()).toContain('Bolinhas'));
-    expect(text()).toContain('Cão · Labrador');
+    expect(text()).toContain('Cão • Labrador • 3 anos');
     expect(text()).toContain('3 anos');
     const card = petCard('Bolinhas');
     expect(prop(card, 'commandFor')).toBe('minha-doggie-pet-form');

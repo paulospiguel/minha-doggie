@@ -4,7 +4,7 @@ export type ModalElement = HTMLElementTagNameMap['s-modal'];
 import {useEffect, useState} from 'preact/hooks';
 import {LIMITS, MODAL_IDS} from '../constants';
 import {COPY} from '../copy';
-import {validatePetDraft} from '@minha-doggie/core';
+import {SPECIES_LIST, validatePetDraft} from '@minha-doggie/core';
 import type {PetDraft, PetErrors, ValidPetInput} from '../types';
 
 export type PetSubmitResult = {status: 'saved'} | {status: 'error'; message: string};
@@ -141,12 +141,11 @@ export function PetFormModal({
           error={errors.species}
           onChange={(event: Event) => update('species', readFirstValue(event))}
         >
-          <s-choice value="dog" selected={draft.species === 'dog'}>
-            {COPY.pets.species.dog}
-          </s-choice>
-          <s-choice value="cat" selected={draft.species === 'cat'}>
-            {COPY.pets.species.cat}
-          </s-choice>
+          {SPECIES_LIST.map((species) => (
+            <s-choice key={species} value={species} selected={draft.species === species}>
+              {COPY.pets.species[species]}
+            </s-choice>
+          ))}
         </s-choice-list>
         <s-text-field
           label={COPY.petForm.breed}

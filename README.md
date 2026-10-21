@@ -41,6 +41,7 @@ O `extensions/minha-doggie/shopify.extension.toml` **não vem no pacote** (não 
 | Últimas encomendas | Até 3 encomendas reais (miniatura do 1.º artigo, número, data, total em €, estado, link para o detalhe nativo) + "Ver todas ›". Estados de carregamento, vazio e erro isolado | ✅ |
 | Ações rápidas | Mosaicos: Ver encomendas (histórico, onde está o "Comprar novamente" nativo) · Atualizar morada · Adicionar companheiro (navegação/ação reais) | ✅ |
 | Índices de segmentação | Cada gravação de companheiros (cliente ou admin) atualiza `$app:pet_species` e `$app:pet_count` na mesma chamada atómica | ✅ v1.2 |
+| **Admin** · Página principal da app (`Aplicações › Minha DOGGIE`) | Painel central (`admin.app.home.render`) com configurações e paleta da página de cliente, estado das extensões, atalhos para o editor de Checkout/Contas, Clientes e Ficheiros, e ferramentas (Segmentos, Exportar CSV, Reindexar) | ✅ v1.2 |
 | **Admin** · Bloco na ficha do cliente | Companheiros do cliente: listar, adicionar, editar, remover (confirmação); aviso + "Sincronizar índices" se estiverem desatualizados | ✅ v1.2 |
 | **Admin** · Lista de clientes › Mais ações › Minha DOGGIE | Exportar CSV · Segmentos por espécie (consultas, verificação, criação) · Reindexar (backfill) | ✅ v1.2 |
 | **Admin** · Lista de clientes › seleção › Minha DOGGIE | Exportar CSV só dos clientes selecionados | ✅ v1.2 |
@@ -60,6 +61,7 @@ minha-doggie-v1/
 ├─ shopify.app.toml                  # app, scopes e definições dos metafields $app:pets / pet_species / pet_count
 ├─ package.json                      # workspaces (packages/*, extensions/*) + scripts
 ├─ eslint.config.js · vitest.config.ts · .nvmrc (Node 22)
+├─ assets/                           # ícone oficial da app para o Dev Dashboard (app-icon.png 1200×1200, app-icon-512.png)
 ├─ scripts/
 │  ├─ bundle-check.mjs               # bundles esbuild offline (todos os targets) + verificações de segurança
 │  └─ validate-graphql.mjs           # valida as operações contra os schemas oficiais (cliente + admin)
@@ -73,13 +75,14 @@ minha-doggie-v1/
 │  └─ tests/                         # 60 testes
 ├─ extensions/minha-doggie/          # conta de cliente (customer-account.page.render) — inalterada visualmente
 │  └─ src/ · tests/                  # 50 testes
-└─ extensions/minha-doggie-admin/    # admin (3 targets, um só shopify.extension.toml)
+└─ extensions/minha-doggie-admin/    # admin (4 targets, um só shopify.extension.toml)
+   ├─ src/AppHome.tsx                # admin.app.home.render (Aplicações › Minha DOGGIE)
    ├─ src/CustomerPetsBlock.tsx      # admin.customer-details.block.render
    ├─ src/CustomerTools.tsx          # admin.customer-index.action.render
    ├─ src/CustomerSelectionExport.tsx# admin.customer-index.selection-action.render
-   ├─ src/components/                # PetsBlock, PetForm, ExportPanel, SegmentsPanel, ReindexPanel
+   ├─ src/components/                # ConfigPanel, PetsBlock, PetForm, ExportPanel, SegmentsPanel, ReindexPanel
    ├─ src/graphql/                   # operations.ts (Admin API 2026-10), client.ts, api.ts
-   └─ tests/                         # 26 testes (API simulada + renderização)
+   └─ tests/                         # 27 testes (API simulada + renderização)
 ```
 
 ### Dados guardados

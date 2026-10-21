@@ -81,16 +81,11 @@ export function PetsSection({view, saving, onAdd, onOpen, onRetry}: PetsSectionP
 
         {view.status === 'ready' && view.pets.length > 0 ? (
           <s-stack direction="block" gap="base">
-            <s-query-container>
-              <s-grid
-                gridTemplateColumns="@container (inline-size > 480px) repeat(2, minmax(0, 1fr)), minmax(0, 1fr)"
-                gap="base"
-              >
-                {view.pets.map((pet) => (
-                  <PetCard key={pet.id} pet={pet} disabled={saving} onOpen={onOpen} />
-                ))}
-              </s-grid>
-            </s-query-container>
+            <s-stack direction="block" gap="small">
+              {view.pets.map((pet) => (
+                <PetCard key={pet.id} pet={pet} disabled={saving} onOpen={onOpen} />
+              ))}
+            </s-stack>
             {view.discarded > 0 ? <s-text color="subdued">{COPY.pets.discarded}</s-text> : null}
             {view.pets.length >= LIMITS.maxPets ? (
               <s-text color="subdued">{COPY.pets.limitReached(LIMITS.maxPets)}</s-text>

@@ -190,7 +190,88 @@ export const SEGMENT_CREATE_MUTATION = /* GraphQL */ `
   }
 `;
 
+export const BANNER_QUERY = /* GraphQL */ `
+  query MinhaDoggieAdminBanner {
+    shop {
+      id
+      banner: metafield(namespace: "$app", key: "banner") {
+        value
+      }
+    }
+  }
+`;
+
+export const BANNER_SET_MUTATION = /* GraphQL */ `
+  mutation MinhaDoggieAdminSetBanner($metafields: [MetafieldsSetInput!]!) {
+    metafieldsSet(metafields: $metafields) {
+      metafields {
+        key
+      }
+      userErrors {
+        field
+        message
+        code
+      }
+    }
+  }
+`;
+
+export const STAGED_UPLOAD_MUTATION = /* GraphQL */ `
+  mutation MinhaDoggieAdminStagedUpload($input: [StagedUploadInput!]!) {
+    stagedUploadsCreate(input: $input) {
+      stagedTargets {
+        url
+        resourceUrl
+        parameters {
+          name
+          value
+        }
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+export const FILE_CREATE_MUTATION = /* GraphQL */ `
+  mutation MinhaDoggieAdminFileCreate($files: [FileCreateInput!]!) {
+    fileCreate(files: $files) {
+      files {
+        id
+        fileStatus
+      }
+      userErrors {
+        field
+        message
+        code
+      }
+    }
+  }
+`;
+
+export const FILE_STATUS_QUERY = /* GraphQL */ `
+  query MinhaDoggieAdminFileStatus($id: ID!) {
+    node(id: $id) {
+      ... on MediaImage {
+        id
+        fileStatus
+        image {
+          url
+        }
+      }
+    }
+  }
+`;
+
 export const ALL_OPERATIONS = {
+  BANNER_QUERY,
+  BANNER_SET_MUTATION,
+  STAGED_UPLOAD_MUTATION,
+  FILE_CREATE_MUTATION,
+  FILE_STATUS_QUERY,
+
   CUSTOMER_PETS_QUERY,
   SET_PETS_MUTATION,
   DELETE_PET_INDEX_MUTATION,

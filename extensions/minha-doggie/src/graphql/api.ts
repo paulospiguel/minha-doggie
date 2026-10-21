@@ -1,4 +1,11 @@
-import {buildPetsWrite, parsePetsMetafield, type MetafieldIdentifierInput, type MetafieldsSetInput} from '@minha-doggie/core';
+import {
+  buildPetsWrite,
+  parseBanner,
+  parsePetsMetafield,
+  type BannerConfig,
+  type MetafieldIdentifierInput,
+  type MetafieldsSetInput,
+} from '@minha-doggie/core';
 import {LIMITS, PETS_METAFIELD} from '../constants';
 import type {CustomerProfile, OrderNode, Pet, PetsState} from '../types';
 import {CustomerAccountApiError, customerAccountRequest, type FetchLike} from './client';
@@ -9,6 +16,9 @@ interface CustomerQueryData {
     id: string;
     firstName: string | null;
     pets: {value: string; compareDigest: string} | null;
+  } | null;
+  shop?: {
+    banner?: {value: string} | null;
   } | null;
 }
 
@@ -50,6 +60,7 @@ export interface CustomerData {
   profile: CustomerProfile;
   /** null se o JSON guardado estiver ilegível (escritas bloqueadas). */
   pets: PetsState | null;
+  banner: BannerConfig;
 }
 
 export async function fetchCustomer(fetchImpl?: FetchLike): Promise<CustomerData> {
@@ -59,14 +70,16 @@ export async function fetchCustomer(fetchImpl?: FetchLike): Promise<CustomerData
     throw new CustomerAccountApiError('empty', 'No authenticated customer');
   }
   const profile: CustomerProfile = {id: customer.id, firstName: customer.firstName ?? null};
+  const banner = parseBanner(data.shop?.banner?.value);
   try {
     const parsed = parsePetsMetafield(customer.pets?.value);
     return {
       profile,
       pets: {pets: parsed.pets, discarded: parsed.discarded, compareDigest: customer.pets?.compareDigest ?? null},
+      banner,
     };
   } catch {
-    return {profile, pets: null};
+    return {profile, pets: null, banner};
   }
 }
 

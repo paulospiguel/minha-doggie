@@ -19,15 +19,21 @@ interface TileProps {
 
 function TileContent({icon, title, body}: Omit<TileProps, 'target'>) {
   return (
-    <s-stack direction="block" gap="small">
-      <s-grid gridTemplateColumns="minmax(0, 1fr) auto" alignItems="center">
-        <s-icon type={icon} />
+    <s-stack direction="block" gap="large">
+      <s-grid gridTemplateColumns="minmax(0, 1fr) auto" alignItems="start">
+        <s-stack direction="inline">
+          <s-box background="subdued" borderRadius="large" padding="small">
+            <s-icon type={icon} />
+          </s-box>
+        </s-stack>
         <s-icon type="chevron-right" size="small" />
       </s-grid>
-      <s-text type="strong">{title}</s-text>
-      <s-text color="subdued" type="small">
-        {body}
-      </s-text>
+      <s-stack direction="block" gap="small-300">
+        <s-text type="strong">{title}</s-text>
+        <s-text color="subdued" type="small">
+          {body}
+        </s-text>
+      </s-stack>
     </s-stack>
   );
 }
@@ -63,11 +69,11 @@ export function QuickActions({canAddPet, onAddPet}: QuickActionsProps) {
     <s-section accessibilityLabel={COPY.quickActions.heading}>
       <s-stack direction="block" gap="base">
         <SectionHeader icon="grid" title={COPY.quickActions.heading} />
+        <s-text color="subdued" type="small">
+          {COPY.quickActions.subheading}
+        </s-text>
         <s-query-container>
-          <s-grid
-            gridTemplateColumns="@container (inline-size > 400px) repeat(3, minmax(0, 1fr)), minmax(0, 1fr)"
-            gap="small"
-          >
+          <s-grid gridTemplateColumns="repeat(2, minmax(0, 1fr))" gap="base">
             <Tile icon="reorder" title={COPY.quickActions.orders.title} body={COPY.quickActions.orders.body} target={{href: ROUTES.orders}} />
             <Tile icon="location" title={COPY.quickActions.profile.title} body={COPY.quickActions.profile.body} target={{href: ROUTES.profile}} />
             <Tile
@@ -76,6 +82,7 @@ export function QuickActions({canAddPet, onAddPet}: QuickActionsProps) {
               body={COPY.quickActions.addPet.body}
               target={{commandFor: MODAL_IDS.petForm, onClick: onAddPet, disabled: !canAddPet}}
             />
+            <Tile icon="profile" title={COPY.quickActions.account.title} body={COPY.quickActions.account.body} target={{href: ROUTES.profile}} />
           </s-grid>
         </s-query-container>
       </s-stack>

@@ -98,6 +98,13 @@ export function App() {
     return {status: 'saved'};
   }
 
+  const heroImageUrl =
+    customer.banner.enabled && customer.banner.imageUrl ? customer.banner.imageUrl : settings.heroImageUrl;
+  const heroImageAlt =
+    customer.banner.enabled && customer.banner.imageUrl
+      ? customer.banner.alt || settings.heroImageAlt
+      : settings.heroImageAlt;
+
   return (
     <s-page heading={COPY.page.greeting(firstName)} subheading={COPY.page.subheading} inlineSize="large">
       <s-stack direction="block" gap="large">
@@ -105,14 +112,15 @@ export function App() {
 
         <WelcomeSection
           storeUrl={settings.storeUrl}
-          heroImageUrl={settings.heroImageUrl}
-          heroImageAlt={settings.heroImageAlt}
+          heroImageUrl={heroImageUrl}
+          heroImageAlt={heroImageAlt}
         />
 
         <s-query-container>
           <s-grid
-            gridTemplateColumns="@container (inline-size > 860px) minmax(0, 1fr) minmax(0, 1fr), minmax(0, 1fr)"
+            gridTemplateColumns="@container (inline-size > 860px) minmax(0, 7fr) minmax(0, 5fr), minmax(0, 1fr)"
             gap="large"
+            alignItems="start"
           >
             <s-stack direction="block" gap="large">
               <PetsSection
@@ -125,11 +133,9 @@ export function App() {
                 }}
               />
               <OrdersSection state={orders} storeUrl={settings.storeUrl} />
-            </s-stack>
-            <s-stack direction="block" gap="large">
               <SubscriptionsSection manageUrl={settings.subscriptionsUrl} />
-              <QuickActions canAddPet={canAddPet} onAddPet={openCreate} />
             </s-stack>
+            <QuickActions canAddPet={canAddPet} onAddPet={openCreate} />
           </s-grid>
         </s-query-container>
       </s-stack>

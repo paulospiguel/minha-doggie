@@ -40,3 +40,19 @@ type = "ui_extension"
 [[extensions.targeting]]
 module = "./src/CustomerSelectionExport.tsx"
 target = "admin.customer-index.selection-action.render"
+
+# 4) Página principal da app no Admin (Aplicações › Minha DOGGIE): configurações e ferramentas
+# Nota: O target `admin.app.home.render` exige `handle = "app-home"`.
+[[extensions]]
+name = "Minha DOGGIE (painel)"
+handle = "app-home"
+uid = "7cad4469-f4f4-bb52-1595-658a64ed7c66bb67fd3b"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/AppHome.tsx"
+target = "admin.app.home.render"
+
+[extensions.capabilities]
+network_access = true
+
