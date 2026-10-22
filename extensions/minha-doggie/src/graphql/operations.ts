@@ -52,6 +52,30 @@ export const RECENT_ORDERS_QUERY = /* GraphQL */ `
   }
 `;
 
+export const SUBSCRIPTIONS_QUERY = /* GraphQL */ `
+  query MinhaDoggieSubscriptions($first: Int!) {
+    customer {
+      subscriptionContracts(first: $first) {
+        nodes {
+          id
+          status
+          nextBillingDate
+          lines(first: 1) {
+            nodes {
+              title
+              quantity
+              image {
+                url(transform: {maxWidth: 160, maxHeight: 160})
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const SET_PETS_MUTATION = /* GraphQL */ `
   mutation MinhaDoggieSetPets($metafields: [MetafieldsSetInput!]!) {
     metafieldsSet(metafields: $metafields) {
@@ -90,6 +114,7 @@ export const DELETE_PET_INDEX_MUTATION = /* GraphQL */ `
 export const ALL_OPERATIONS = {
   CUSTOMER_QUERY,
   RECENT_ORDERS_QUERY,
+  SUBSCRIPTIONS_QUERY,
   SET_PETS_MUTATION,
   DELETE_PET_INDEX_MUTATION,
 } as const;

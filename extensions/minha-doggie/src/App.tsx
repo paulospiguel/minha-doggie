@@ -9,6 +9,7 @@ import {SubscriptionsSection} from './components/SubscriptionsSection';
 import {WelcomeSection} from './components/WelcomeSection';
 import {useCustomerData, type SaveFailureReason} from './hooks/useCustomerData';
 import {useRecentOrders} from './hooks/useRecentOrders';
+import {useSubscriptions} from './hooks/useSubscriptions';
 import {emptyPetDraft, petToDraft, removePet, upsertPet} from '@minha-doggie/core';
 import {displayFirstName, readSettings} from './lib/settings';
 import {readRawSettings, showToast} from './platform';
@@ -39,6 +40,7 @@ export function App() {
   const settings = readSettings(readRawSettings());
   const customer = useCustomerData();
   const orders = useRecentOrders();
+  const subscriptions = useSubscriptions();
 
   const formRef = useRef<ModalElement>(null);
   const [formSession, setFormSession] = useState(0);
@@ -133,7 +135,7 @@ export function App() {
                 }}
               />
               <OrdersSection state={orders} storeUrl={settings.storeUrl} />
-              <SubscriptionsSection manageUrl={settings.subscriptionsUrl} />
+              <SubscriptionsSection state={subscriptions} manageUrl={settings.subscriptionsUrl} />
             </s-stack>
             <QuickActions canAddPet={canAddPet} onAddPet={openCreate} storeUrl={settings.storeUrl} />
           </s-grid>

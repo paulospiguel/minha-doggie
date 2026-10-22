@@ -73,6 +73,12 @@ declare module './src/hooks/useRecentOrders.ts' {
 }
 
 //@ts-ignore
+declare module './src/hooks/useSubscriptions.ts' {
+  const shopify: import('@shopify/ui-extensions/customer-account.page.render').Api;
+  const globalThis: { shopify: typeof shopify };
+}
+
+//@ts-ignore
 declare module './src/lib/settings.ts' {
   const shopify: import('@shopify/ui-extensions/customer-account.page.render').Api;
   const globalThis: { shopify: typeof shopify };
@@ -97,6 +103,12 @@ declare module './src/components/PetCard.tsx' {
 }
 
 //@ts-ignore
+declare module './src/lib/orders.ts' {
+  const shopify: import('@shopify/ui-extensions/customer-account.page.render').Api;
+  const globalThis: { shopify: typeof shopify };
+}
+
+//@ts-ignore
 declare module './src/graphql/api.ts' {
   const shopify: import('@shopify/ui-extensions/customer-account.page.render').Api;
   const globalThis: { shopify: typeof shopify };
@@ -110,12 +122,6 @@ declare module './src/graphql/client.ts' {
 
 //@ts-ignore
 declare module './src/graphql/operations.ts' {
-  const shopify: import('@shopify/ui-extensions/customer-account.page.render').Api;
-  const globalThis: { shopify: typeof shopify };
-}
-
-//@ts-ignore
-declare module './src/lib/orders.ts' {
   const shopify: import('@shopify/ui-extensions/customer-account.page.render').Api;
   const globalThis: { shopify: typeof shopify };
 }

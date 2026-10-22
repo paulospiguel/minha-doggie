@@ -77,6 +77,17 @@ export const COPY = {
     manageAccessibility: 'Gerir subscrição (abre o portal de subscrições)',
     emptyTitle: 'Sem subscrições para mostrar',
     emptyBody: 'Quando a gestão de compras recorrentes estiver disponível, vais encontrá-la aqui.',
+    loading: 'A carregar as tuas subscrições…',
+    nextBilling: (date: string) => `Próxima entrega: ${date}`,
+    quantity: (count: number) => `Qtd. ${count}`,
+    status: {
+      ACTIVE: 'Ativa',
+      PAUSED: 'Em pausa',
+      CANCELLED: 'Cancelada',
+      EXPIRED: 'Expirada',
+      FAILED: 'Falhada',
+      UNKNOWN: 'Subscrição',
+    } as Record<string, string>,
   },
   orders: {
     heading: 'Últimas encomendas',

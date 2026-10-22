@@ -9,7 +9,30 @@ import {
 import {LIMITS, PETS_METAFIELD} from '../constants';
 import type {CustomerProfile, OrderNode, Pet, PetsState} from '../types';
 import {CustomerAccountApiError, customerAccountRequest, type FetchLike} from './client';
-import {CUSTOMER_QUERY, DELETE_PET_INDEX_MUTATION, RECENT_ORDERS_QUERY, SET_PETS_MUTATION} from './operations';
+import {
+  CUSTOMER_QUERY,
+  DELETE_PET_INDEX_MUTATION,
+  RECENT_ORDERS_QUERY,
+  SET_PETS_MUTATION,
+  SUBSCRIPTIONS_QUERY,
+} from './operations';
+
+export interface SubscriptionNode {
+  id: string;
+  status: string | null;
+  nextBillingDate: string | null;
+  lines?: {
+    nodes?: Array<{
+      title: string | null;
+      quantity: number | null;
+      image?: {url: string | null; altText: string | null} | null;
+    }>;
+  } | null;
+}
+
+interface SubscriptionsData {
+  customer: {subscriptionContracts: {nodes: SubscriptionNode[]} | null} | null;
+}
 
 interface CustomerQueryData {
   customer: {
@@ -90,6 +113,15 @@ export async function fetchRecentOrders(fetchImpl?: FetchLike): Promise<OrderNod
     fetchImpl,
   );
   return data.customer?.orders?.nodes ?? [];
+}
+
+export async function fetchSubscriptions(first = 3, fetchImpl?: FetchLike): Promise<SubscriptionNode[]> {
+  const data = await customerAccountRequest<SubscriptionsData, {first: number}>(
+    SUBSCRIPTIONS_QUERY,
+    {first},
+    fetchImpl,
+  );
+  return data.customer?.subscriptionContracts?.nodes ?? [];
 }
 
 /**
