@@ -26,7 +26,15 @@ export function PetCard({pet, disabled, onOpen}: PetCardProps) {
       onClick={() => onOpen(pet)}
     >
       <s-grid gridTemplateColumns="auto minmax(0, 1fr) auto" gap="base" alignItems="center">
-        <s-avatar initials={petInitials(pet.name)} alt={pet.name} size="large" />
+        <s-box
+          background="subdued"
+          border="base"
+          borderRadius="base"
+          paddingBlock="small-100"
+          paddingInline="small"
+        >
+          <s-text type="strong">{petInitials(pet.name)}</s-text>
+        </s-box>
         <s-stack direction="block" gap="none">
           <s-text type="strong">{pet.name}</s-text>
           <s-text color="subdued" type="small">{summary}</s-text>

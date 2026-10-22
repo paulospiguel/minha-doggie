@@ -50,6 +50,22 @@ describe('AppHome (admin.app.home.render)', () => {
           },
         },
       }),
+      MinhaDoggieAdminLibraryFiles: () => ({
+        data: {
+          files: {
+            nodes: [
+              {
+                id: 'gid://shopify/MediaImage/101',
+                alt: 'Banner da Biblioteca',
+                createdAt: '2026-10-20T10:00:00Z',
+                image: {
+                  url: 'https://cdn.shopify.com/s/files/1/library-banner.jpg',
+                },
+              },
+            ],
+          },
+        },
+      }),
       MinhaDoggieAdminPetDefinitions: () => ({
         data: {
           metafieldDefinitions: {
@@ -92,7 +108,7 @@ describe('AppHome (admin.app.home.render)', () => {
 
     const page = document.body.querySelector('s-page');
     expect(page).not.toBeNull();
-    expect(prop(page, 'heading')).toBe('Minha DOGGIE');
+    expect(prop(page, 'heading')).toBe('DOGGIE • Conta de Cliente & Gestão');
 
     // Secções documentadas, incluindo o banner
     const sections = Array.from(document.body.querySelectorAll('s-section')).map((s) => prop(s, 'heading'));
@@ -106,8 +122,18 @@ describe('AppHome (admin.app.home.render)', () => {
     expect(text()).toContain('#92278F');
     expect(text()).toContain('#DA1C5C');
 
-    // Banner carregado e possibilidade de guardar
+    // Banner carregado, seleção de imagem da biblioteca e possibilidade de guardar
     await waitFor(() => expect(text()).toContain('Guardar banner'));
+    const chooseFromLibBtn = Array.from(document.body.querySelectorAll('s-button')).find(
+      (b) => b.textContent?.trim() === 'Escolher imagem da biblioteca',
+    )!;
+    fireEvent.click(chooseFromLibBtn);
+    await waitFor(() => expect(text()).toContain('library-banner.jpg'));
+    const selectImgBtn = Array.from(document.body.querySelectorAll('s-button')).find(
+      (b) => b.textContent?.trim() === 'Selecionar',
+    )!;
+    fireEvent.click(selectImgBtn);
+
     const saveBannerBtn = Array.from(document.body.querySelectorAll('s-button')).find(
       (b) => b.textContent?.trim() === 'Guardar banner',
     )!;

@@ -53,6 +53,3 @@ type = "ui_extension"
 module = "./src/AppHome.tsx"
 target = "admin.app.home.render"
 
-[extensions.capabilities]
-network_access = true
-

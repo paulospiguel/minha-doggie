@@ -11,6 +11,7 @@ export const COPY = {
   },
   welcome: {
     label: 'Boas-vindas',
+    badge: 'Área Exclusiva',
     intro: 'Tudo o que precisas para cuidar de quem te faz mais feliz.',
     manageProfile: 'Gerir perfil',
     shopAgain: 'Voltar a comprar',
@@ -84,7 +85,7 @@ export const COPY = {
     loading: 'A carregar as tuas encomendas…',
     emptyTitle: 'Ainda não tens encomendas',
     emptyBody: 'Quando fizeres a tua primeira compra, vais vê-la aqui.',
-    startShopping: 'Começar a comprar',
+    startShopping: 'Começar a comprar →',
     error: 'Não foi possível carregar as encomendas recentes.',
     errorAction: 'Ver histórico completo',
     detailAccessibility: (name: string) => `Ver detalhe da encomenda ${name}`,
@@ -110,6 +111,7 @@ export const COPY = {
     orders: {title: 'Ver encomendas', body: 'Consulta o histórico e volta a comprar.'},
     profile: {title: 'Atualizar morada', body: 'Mantém os teus dados atualizados.'},
     addPet: {title: 'Adicionar companheiro', body: 'Regista um novo membro da família.'},
+    support: {label: 'Apoio ao cliente DOGGIE', action: 'Contactar'},
   },
   account: {
     loadError: 'Não foi possível carregar a tua conta. Atualiza a página para tentar novamente.',

@@ -1,11 +1,11 @@
 import {MODAL_IDS, ROUTES} from '../constants';
 import {COPY} from '../copy';
 import type {IconName} from '../types';
-import {SectionHeader} from './SectionHeader';
 
 interface QuickActionsProps {
   canAddPet: boolean;
   onAddPet: () => void;
+  storeUrl: string;
 }
 
 type TileTarget = {href: string} | {commandFor: string; onClick: () => void; disabled: boolean};
@@ -64,14 +64,21 @@ function Tile({icon, title, body, target}: TileProps) {
   );
 }
 
-export function QuickActions({canAddPet, onAddPet}: QuickActionsProps) {
+export function QuickActions({canAddPet, onAddPet, storeUrl}: QuickActionsProps) {
   return (
     <s-section accessibilityLabel={COPY.quickActions.heading}>
       <s-stack direction="block" gap="base">
-        <SectionHeader icon="grid" title={COPY.quickActions.heading} />
-        <s-text color="subdued" type="small">
-          {COPY.quickActions.subheading}
-        </s-text>
+        <s-stack direction="inline" gap="small" alignItems="center">
+          <s-box background="subdued" borderRadius="base" padding="small-100">
+            <s-icon type="grid" />
+          </s-box>
+          <s-stack direction="block" gap="none">
+            <s-heading>{COPY.quickActions.heading}</s-heading>
+            <s-text color="subdued" type="small">
+              {COPY.quickActions.subheading}
+            </s-text>
+          </s-stack>
+        </s-stack>
         <s-query-container>
           <s-grid gridTemplateColumns="repeat(2, minmax(0, 1fr))" gap="base">
             <Tile icon="reorder" title={COPY.quickActions.orders.title} body={COPY.quickActions.orders.body} target={{href: ROUTES.orders}} />
@@ -85,6 +92,17 @@ export function QuickActions({canAddPet, onAddPet}: QuickActionsProps) {
             <Tile icon="profile" title={COPY.quickActions.account.title} body={COPY.quickActions.account.body} target={{href: ROUTES.profile}} />
           </s-grid>
         </s-query-container>
+        <s-box background="subdued" borderRadius="large" paddingBlock="small" paddingInline="base">
+          <s-grid gridTemplateColumns="minmax(0, 1fr) auto" gap="base" alignItems="center">
+            <s-stack direction="inline" gap="small-200" alignItems="center">
+              <s-icon type="bullet" tone="success" size="small" />
+              <s-text color="subdued" type="small">
+                {COPY.quickActions.support.label}
+              </s-text>
+            </s-stack>
+            <s-link href={storeUrl}>{COPY.quickActions.support.action}</s-link>
+          </s-grid>
+        </s-box>
       </s-stack>
     </s-section>
   );

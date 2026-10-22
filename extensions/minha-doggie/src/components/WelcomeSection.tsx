@@ -15,34 +15,40 @@ interface WelcomeSectionProps {
  * Conteúdo → Ficheiros — as extensões não podem incluir imagens no bundle).
  */
 export function WelcomeSection({storeUrl, heroImageUrl, heroImageAlt}: WelcomeSectionProps) {
-  const columns = heroImageUrl ? '@container (inline-size > 640px) minmax(0, 1fr) minmax(0, 1.2fr), minmax(0, 1fr)' : 'minmax(0, 1fr)';
+  const columns = heroImageUrl
+    ? '@container (inline-size > 640px) minmax(0, 1.15fr) minmax(0, 1fr), minmax(0, 1fr)'
+    : 'minmax(0, 1fr)';
   return (
-    <s-section padding="none" accessibilityLabel={COPY.welcome.label}>
+    <s-section accessibilityLabel={COPY.welcome.label}>
       <s-query-container>
-        <s-grid gridTemplateColumns={columns} alignItems="center" overflow="hidden">
-          <s-box padding="large-200">
-            <s-stack direction="block" gap="large">
-              <s-stack direction="block" gap="small-100">
-                <s-paragraph>{COPY.welcome.intro}</s-paragraph>
-                <s-text color="subdued" type="small">
-                  {COPY.page.slogan}
-                </s-text>
-              </s-stack>
-              <s-stack direction="inline" gap="base">
-                <s-button variant="primary" href={ROUTES.profile}>
-                  {COPY.welcome.manageProfile}
-                </s-button>
-                <s-button variant="secondary" href={storeUrl}>
-                  {COPY.welcome.shopAgain}
-                </s-button>
-              </s-stack>
+        <s-grid gridTemplateColumns={columns} gap="large" alignItems="center">
+          <s-stack direction="block" gap="base">
+            <s-stack direction="inline">
+              <s-badge size="small" color="subdued">
+                {COPY.welcome.badge}
+              </s-badge>
             </s-stack>
-          </s-box>
+            <s-stack direction="block" gap="small-100">
+              <s-heading>{COPY.welcome.intro}</s-heading>
+              <s-text tone="critical" type="strong">
+                {COPY.page.slogan}
+              </s-text>
+            </s-stack>
+            <s-stack direction="inline" gap="base">
+              <s-button variant="primary" href={ROUTES.profile}>
+                {COPY.welcome.manageProfile}
+              </s-button>
+              <s-button variant="secondary" href={storeUrl}>
+                {COPY.welcome.shopAgain}
+              </s-button>
+            </s-stack>
+          </s-stack>
           {heroImageUrl ? (
             <s-image
               src={heroImageUrl}
               alt={heroImageAlt}
-              aspectRatio="2/1"
+              aspectRatio="16/10"
+              borderRadius="large"
               objectFit="cover"
               inlineSize="fill"
               loading="eager"

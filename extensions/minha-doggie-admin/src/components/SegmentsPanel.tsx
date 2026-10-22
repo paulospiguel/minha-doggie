@@ -62,26 +62,32 @@ export function SegmentsPanel() {
     const segments = buildSegmentQueries(load.info.namespace);
     content = (
       <s-stack direction="block" gap="base">
-        {load.info.suggestedQueryName ? <s-text color="subdued">{copy.suggestion(load.info.suggestedQueryName)}</s-text> : null}
+        {load.info.suggestedQueryName ? (
+          <s-stack direction="inline" gap="small" alignItems="center">
+            <s-text color="subdued">{copy.suggestionLabel}</s-text>
+            <s-badge tone="neutral">{load.info.suggestedQueryName}</s-badge>
+          </s-stack>
+        ) : null}
         {segments.map((segment) => {
           const row = rows[segment.id] ?? {};
           return (
-            <s-stack key={segment.id} direction="block" gap="small">
-              <s-divider />
-              <s-text type="strong">{segment.name}</s-text>
-              <s-text-area label={segment.name} labelAccessibilityVisibility="exclusive" value={segment.query} readOnly rows={2} />
-              <s-stack direction="inline" gap="small" alignItems="center">
-                <s-button variant="secondary" loading={row.busy} onClick={() => void verify(segment)}>
-                  {copy.verify}
-                </s-button>
-                <s-button variant="secondary" disabled={row.busy || row.created} onClick={() => void create(segment)}>
-                  {copy.create}
-                </s-button>
-                {row.count !== undefined ? <s-badge>{copy.count(row.count)}</s-badge> : null}
-                {row.created ? <s-badge tone="success">{copy.created}</s-badge> : null}
+            <s-box key={segment.id} border="base" borderRadius="base" padding="base">
+              <s-stack direction="block" gap="small">
+                <s-text type="strong">{segment.name}</s-text>
+                <s-text-area label={segment.name} labelAccessibilityVisibility="exclusive" value={segment.query} readOnly rows={2} />
+                <s-stack direction="inline" gap="small" alignItems="center">
+                  <s-button variant="secondary" loading={row.busy} onClick={() => void verify(segment)}>
+                    {copy.verify}
+                  </s-button>
+                  <s-button variant="secondary" disabled={row.busy || row.created} onClick={() => void create(segment)}>
+                    {copy.create}
+                  </s-button>
+                  {row.count !== undefined ? <s-badge>{copy.count(row.count)}</s-badge> : null}
+                  {row.created ? <s-badge tone="success">{copy.created}</s-badge> : null}
+                </s-stack>
+                {row.error ? <s-banner tone="critical">{row.error}</s-banner> : null}
               </s-stack>
-              {row.error ? <s-banner tone="critical">{row.error}</s-banner> : null}
-            </s-stack>
+            </s-box>
           );
         })}
       </s-stack>

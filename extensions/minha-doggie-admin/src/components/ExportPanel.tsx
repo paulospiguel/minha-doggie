@@ -55,16 +55,23 @@ export function ExportPanel({selectedIds}: {selectedIds?: readonly string[]}) {
       <s-stack direction="block" gap="base">
         <s-paragraph>{copy.intro}</s-paragraph>
         {selectedIds ? <s-text type="strong">{copy.selectionCount(selectedIds.length)}</s-text> : null}
-        {!selectedIds ? (
-          <s-select label={copy.source} value={source} disabled={running} onChange={(event: Event) => setSource(readValue(event) === 'segment' ? 'segment' : 'all')}>
-            <s-option value="all">{copy.sourceAll}</s-option>
-            <s-option value="segment">{copy.sourceSegment}</s-option>
+        {selectedIds ? (
+          <s-select label={copy.delimiter} value={delimiter} disabled={running} onChange={(event: Event) => setDelimiter(readValue(event) === ',' ? ',' : ';')}>
+            <s-option value=";">{copy.delimiterSemicolon}</s-option>
+            <s-option value=",">{copy.delimiterComma}</s-option>
           </s-select>
-        ) : null}
-        <s-select label={copy.delimiter} value={delimiter} disabled={running} onChange={(event: Event) => setDelimiter(readValue(event) === ',' ? ',' : ';')}>
-          <s-option value=";">{copy.delimiterSemicolon}</s-option>
-          <s-option value=",">{copy.delimiterComma}</s-option>
-        </s-select>
+        ) : (
+          <s-grid gridTemplateColumns="repeat(2, 1fr)" gap="base">
+            <s-select label={copy.source} value={source} disabled={running} onChange={(event: Event) => setSource(readValue(event) === 'segment' ? 'segment' : 'all')}>
+              <s-option value="all">{copy.sourceAll}</s-option>
+              <s-option value="segment">{copy.sourceSegment}</s-option>
+            </s-select>
+            <s-select label={copy.delimiter} value={delimiter} disabled={running} onChange={(event: Event) => setDelimiter(readValue(event) === ',' ? ',' : ';')}>
+              <s-option value=";">{copy.delimiterSemicolon}</s-option>
+              <s-option value=",">{copy.delimiterComma}</s-option>
+            </s-select>
+          </s-grid>
+        )}
         <s-stack direction="inline" gap="small" alignItems="center">
           <s-button variant="primary" loading={running} onClick={() => void run()}>
             {copy.generate}

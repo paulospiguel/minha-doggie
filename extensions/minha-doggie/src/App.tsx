@@ -135,7 +135,7 @@ export function App() {
               <OrdersSection state={orders} storeUrl={settings.storeUrl} />
               <SubscriptionsSection manageUrl={settings.subscriptionsUrl} />
             </s-stack>
-            <QuickActions canAddPet={canAddPet} onAddPet={openCreate} />
+            <QuickActions canAddPet={canAddPet} onAddPet={openCreate} storeUrl={settings.storeUrl} />
           </s-grid>
         </s-query-container>
       </s-stack>

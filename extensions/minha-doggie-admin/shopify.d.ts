@@ -13,14 +13,14 @@ declare module './src/CustomerTools.tsx' {
 }
 
 //@ts-ignore
-declare module './src/CustomerSelectionExport.tsx' {
-  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
+declare module './src/AppHome.tsx' {
+  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
 //@ts-ignore
-declare module './src/AppHome.tsx' {
-  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
+declare module './src/CustomerSelectionExport.tsx' {
+  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
@@ -37,14 +37,14 @@ declare module './src/components/ExportPanel.tsx' {
 }
 
 //@ts-ignore
-declare module './src/components/ExportPanel.tsx' {
-  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
+declare module './src/components/BannerPanel.tsx' {
+  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
 //@ts-ignore
-declare module './src/components/BannerPanel.tsx' {
-  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
+declare module './src/components/ExportPanel.tsx' {
+  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
@@ -157,14 +157,14 @@ declare module './src/lib/events.ts' {
 }
 
 //@ts-ignore
-declare module './src/graphql/client.ts' {
-  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
+declare module './src/copy.ts' {
+  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
 //@ts-ignore
-declare module './src/copy.ts' {
-  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
+declare module './src/graphql/client.ts' {
+  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
@@ -181,14 +181,14 @@ declare module './src/lib/exportFile.ts' {
 }
 
 //@ts-ignore
-declare module './src/graphql/operations.ts' {
-  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
+declare module './src/graphql/banner.ts' {
+  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 
 //@ts-ignore
-declare module './src/graphql/banner.ts' {
-  const shopify: import('@shopify/ui-extensions/admin.app.home.render').Api;
+declare module './src/graphql/operations.ts' {
+  const shopify: import('@shopify/ui-extensions/admin.customer-index.selection-action.render').Api;
   const globalThis: { shopify: typeof shopify };
 }
 

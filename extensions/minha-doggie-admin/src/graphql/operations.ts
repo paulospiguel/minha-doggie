@@ -216,49 +216,19 @@ export const BANNER_SET_MUTATION = /* GraphQL */ `
   }
 `;
 
-export const STAGED_UPLOAD_MUTATION = /* GraphQL */ `
-  mutation MinhaDoggieAdminStagedUpload($input: [StagedUploadInput!]!) {
-    stagedUploadsCreate(input: $input) {
-      stagedTargets {
-        url
-        resourceUrl
-        parameters {
-          name
-          value
-        }
-      }
-      userErrors {
-        field
-        message
-      }
-    }
-  }
-`;
-
-export const FILE_CREATE_MUTATION = /* GraphQL */ `
-  mutation MinhaDoggieAdminFileCreate($files: [FileCreateInput!]!) {
-    fileCreate(files: $files) {
-      files {
-        id
-        fileStatus
-      }
-      userErrors {
-        field
-        message
-        code
-      }
-    }
-  }
-`;
-
-export const FILE_STATUS_QUERY = /* GraphQL */ `
-  query MinhaDoggieAdminFileStatus($id: ID!) {
-    node(id: $id) {
-      ... on MediaImage {
-        id
-        fileStatus
-        image {
-          url
+export const LIBRARY_FILES_QUERY = /* GraphQL */ `
+  query MinhaDoggieAdminLibraryFiles($first: Int!, $query: String!) {
+    files(first: $first, query: $query, sortKey: CREATED_AT, reverse: true) {
+      nodes {
+        ... on MediaImage {
+          id
+          alt
+          createdAt
+          image {
+            url
+            width
+            height
+          }
         }
       }
     }
@@ -268,9 +238,7 @@ export const FILE_STATUS_QUERY = /* GraphQL */ `
 export const ALL_OPERATIONS = {
   BANNER_QUERY,
   BANNER_SET_MUTATION,
-  STAGED_UPLOAD_MUTATION,
-  FILE_CREATE_MUTATION,
-  FILE_STATUS_QUERY,
+  LIBRARY_FILES_QUERY,
 
   CUSTOMER_PETS_QUERY,
   SET_PETS_MUTATION,
