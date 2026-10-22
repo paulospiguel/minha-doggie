@@ -1,4 +1,4 @@
-import {DEFAULT_STORE_URL, LIMITS} from '../constants';
+import {DEFAULT_STORE_URL, DEFAULT_SUBSCRIPTIONS_URL, LIMITS} from '../constants';
 import {COPY} from '../copy';
 import type {ExtensionSettingsInput, MinhaDoggieSettings} from '../types';
 import {sanitizeText, truncate} from '@minha-doggie/core';
@@ -24,7 +24,7 @@ export function readSettings(raw: ExtensionSettingsInput | null | undefined): Mi
   return {
     heroImageUrl: safeHttpsUrl(settings.hero_image_url),
     heroImageAlt: alt || COPY.welcome.defaultImageAlt,
-    subscriptionsUrl: safeHttpsUrl(settings.subscriptions_url),
+    subscriptionsUrl: safeHttpsUrl(settings.subscriptions_url) ?? DEFAULT_SUBSCRIPTIONS_URL,
     storeUrl: safeHttpsUrl(settings.store_url) ?? DEFAULT_STORE_URL,
   };
 }

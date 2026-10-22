@@ -313,24 +313,49 @@ describe('encomendas', () => {
 });
 
 describe('subscrições e ações rápidas', () => {
-  it('estado vazio sem URL configurado (nada inventado)', async () => {
+  it('abre o portal Shopify Subscriptions da DOGGIE por omissão', async () => {
     setup(baseState());
     await extension.render();
-    expect(text()).toContain('Sem subscrições para mostrar');
-    expect(() => byText('s-link', 'Gerir subscrição ›')).toThrow();
+    await waitFor(() => expect(text()).toContain('As tuas compras recorrentes, num só lugar.'));
+    expect(text()).not.toContain('Sem subscrições para mostrar');
+    expect(prop(byText('s-button', 'Ver e gerir subscrições'), 'href')).toBe('https://account.doggie.pt/pages/6971b1a1-27f6-4c27-b8b0-3009fd3b921d/subscriptions');
   });
 
   it('botão de gestão quando o URL HTTPS está configurado', async () => {
     setup(baseState(), {subscriptions_url: 'https://subscricoes.example.com/portal'});
     await extension.render();
-    expect(prop(byText('s-link', 'Gerir subscrição ›'), 'href')).toBe('https://subscricoes.example.com/portal');
-    expect(text()).toContain('Entregas recorrentes');
+    expect(prop(byText('s-button', 'Ver e gerir subscrições'), 'href')).toBe('https://subscricoes.example.com/portal');
+    await waitFor(() => expect(text()).toContain('As tuas compras recorrentes, num só lugar.'));
   });
 
   it('ignora URL de subscrições não-HTTPS', async () => {
     setup(baseState(), {subscriptions_url: 'http://inseguro.example.com'});
     await extension.render();
-    expect(text()).toContain('Sem subscrições para mostrar');
+    await waitFor(() => expect(text()).toContain('As tuas compras recorrentes, num só lugar.'));
+    expect(text()).not.toContain('Sem subscrições para mostrar');
+  });
+
+  it('mantém a gestão disponível sem apresentar uma falsa ausência de subscrições', async () => {
+    setup(baseState({subscriptionsError: true}));
+    await extension.render();
+    await waitFor(() => expect(text()).toContain('Pausa, retoma ou cancela a subscrição.'));
+    expect(text()).not.toContain('Sem subscrições para mostrar');
+  });
+
+  it('mantém o acesso ao portal oficial quando a leitura falha', async () => {
+    setup(baseState({subscriptionsError: true}), {subscriptions_url: 'https://account.doggie.pt/pages/subscriptions'});
+    await extension.render();
+    await waitFor(() => expect(text()).toContain('Pausa, retoma ou cancela a subscrição.'));
+    expect(prop(byText('s-button', 'Ver e gerir subscrições'), 'href')).toBe('https://account.doggie.pt/pages/subscriptions');
+  });
+
+  it('mostra contratos devolvidos pela API', async () => {
+    setup(baseState({subscriptions: [{id: 'gid://shopify/SubscriptionContract/1', status: 'ACTIVE', nextBillingDate: '2026-11-22T00:00:00Z', lines: {nodes: [{title: 'Ração mensal', quantity: 1}]}}]}));
+    await extension.render();
+    await waitFor(() => expect(text()).toContain('Ração mensal'));
+    expect(text()).toContain('Ativa');
+    expect(text()).toContain('Qualquer alteração é feita e confirmada nessa página.');
+    expect(text()).not.toContain('Sem subscrições para mostrar');
   });
 
   it('ações rápidas: três mosaicos com ícone, título, descrição e destino real', async () => {

@@ -54,6 +54,7 @@ export type StatusTone = 'neutral' | 'critical' | 'auto';
 
 /** Encomenda pronta a apresentar. */
 export interface OrderSummary {
+  productTitle?: string;
   id: string;
   name: string;
   dateLabel: string;

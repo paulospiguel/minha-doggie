@@ -125,6 +125,8 @@ export function App() {
             alignItems="start"
           >
             <s-stack direction="block" gap="large">
+              <SubscriptionsSection state={subscriptions} manageUrl={settings.subscriptionsUrl} />
+              <OrdersSection state={orders} storeUrl={settings.storeUrl} />
               <PetsSection
                 view={petsView}
                 saving={customer.saving}
@@ -134,8 +136,6 @@ export function App() {
                   void customer.reload();
                 }}
               />
-              <OrdersSection state={orders} storeUrl={settings.storeUrl} />
-              <SubscriptionsSection state={subscriptions} manageUrl={settings.subscriptionsUrl} />
             </s-stack>
             <QuickActions canAddPet={canAddPet} onAddPet={openCreate} storeUrl={settings.storeUrl} />
           </s-grid>

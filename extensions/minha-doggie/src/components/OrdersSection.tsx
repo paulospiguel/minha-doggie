@@ -73,7 +73,10 @@ function OrderRow({order}: {order: OrderSummary}) {
             gap="small base"
             alignItems="center"
           >
-            <s-text type="strong">{order.name}</s-text>
+            <s-stack direction="block" gap="small-300">
+              <s-text type="strong">{order.name}</s-text>
+              {order.productTitle ? <s-text>{order.productTitle}</s-text> : null}
+            </s-stack>
             <s-text color="subdued">
               <s-time dateTime={order.dateTime}>{order.dateLabel}</s-time>
             </s-text>

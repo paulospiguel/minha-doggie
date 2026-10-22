@@ -23,6 +23,10 @@ export const ROUTES = {
 
 export const DEFAULT_STORE_URL = 'https://store.doggie.pt';
 
+/** Página geral da Shopify Subscriptions da DOGGIE, verificada na conta em 2026-10-22. */
+export const DEFAULT_SUBSCRIPTIONS_URL =
+  'https://account.doggie.pt/pages/6971b1a1-27f6-4c27-b8b0-3009fd3b921d/subscriptions';
+
 export const LIMITS = {
   ...PET_LIMITS,
   recentOrders: 3,

@@ -19,7 +19,7 @@ describe('readSettings', () => {
     expect(readSettings(undefined)).toEqual({
       heroImageUrl: null,
       heroImageAlt: 'Um cão e um gato DOGGIE',
-      subscriptionsUrl: null,
+      subscriptionsUrl: 'https://account.doggie.pt/pages/6971b1a1-27f6-4c27-b8b0-3009fd3b921d/subscriptions',
       storeUrl: 'https://store.doggie.pt',
     });
   });
@@ -34,7 +34,7 @@ describe('readSettings', () => {
     ).toEqual({
       heroImageUrl: 'https://cdn.shopify.com/hero.png',
       heroImageAlt: 'Cão e gato',
-      subscriptionsUrl: null,
+      subscriptionsUrl: 'https://account.doggie.pt/pages/6971b1a1-27f6-4c27-b8b0-3009fd3b921d/subscriptions',
       storeUrl: 'https://store.doggie.pt/collections/all',
     });
   });

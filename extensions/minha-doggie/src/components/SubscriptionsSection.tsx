@@ -12,8 +12,8 @@ interface SubscriptionsSectionProps {
 
 /**
  * Lista as subscrições reais do cliente (Customer Account API). Se a leitura
- * falhar ou não houver contratos, mantém o comportamento anterior: ligação à
- * gestão oficial quando configurada, ou estado vazio.
+ * falhar ou não devolver contratos, encaminha para a gestão oficial. Uma lista
+ * vazia não prova ausência de subscrições: os contratos pertencem à app criadora.
  */
 export function SubscriptionsSection({state, manageUrl}: SubscriptionsSectionProps) {
   const items = state.status === 'ready' ? state.data : [];
@@ -23,14 +23,10 @@ export function SubscriptionsSection({state, manageUrl}: SubscriptionsSectionPro
         <SectionHeader
           icon="calendar"
           title={COPY.subscriptions.heading}
-          action={
-            manageUrl
-              ? {label: COPY.subscriptions.manage, accessibilityLabel: COPY.subscriptions.manageAccessibility, href: manageUrl}
-              : null
-          }
+
         />
 
-        {state.status === 'loading' ? <s-skeleton-paragraph content={COPY.subscriptions.loading} /> : null}
+        {state.status === 'loading' && !manageUrl ? <s-skeleton-paragraph content={COPY.subscriptions.loading} /> : null}
 
         {items.length > 0 ? (
           <s-stack direction="block" gap="none">
@@ -43,20 +39,29 @@ export function SubscriptionsSection({state, manageUrl}: SubscriptionsSectionPro
           </s-stack>
         ) : null}
 
-        {state.status !== 'loading' && items.length === 0 ? (
-          <s-box background="subdued" borderRadius="large" padding="base">
-            {manageUrl ? (
-              <s-stack direction="block" gap="small-200">
-                <s-text type="strong">{COPY.subscriptions.configuredTitle}</s-text>
-                <s-paragraph color="subdued">{COPY.subscriptions.configuredBody}</s-paragraph>
-              </s-stack>
-            ) : (
-              <s-stack direction="block" gap="small-200">
-                <s-text type="strong">{COPY.subscriptions.emptyTitle}</s-text>
-                <s-paragraph color="subdued">{COPY.subscriptions.emptyBody}</s-paragraph>
-              </s-stack>
-            )}
-          </s-box>
+        {manageUrl ? (
+          <s-stack direction="block" gap="base">
+            <s-paragraph>{COPY.subscriptions.portalBody}</s-paragraph>
+            <s-stack direction="block" gap="small-200">
+              <s-text type="strong">{COPY.subscriptions.deliveriesTitle}</s-text>
+              <s-text color="subdued">{COPY.subscriptions.deliveriesBody}</s-text>
+            </s-stack>
+            <s-stack direction="block" gap="small-200">
+              <s-text type="strong">{COPY.subscriptions.changesTitle}</s-text>
+              <s-text color="subdued">{COPY.subscriptions.changesBody}</s-text>
+            </s-stack>
+            <s-stack direction="inline">
+              <s-button href={manageUrl} variant="primary" accessibilityLabel={COPY.subscriptions.manageAccessibility}>
+                {COPY.subscriptions.manage}
+              </s-button>
+            </s-stack>
+            <s-text color="subdued" type="small">{COPY.subscriptions.portalHint}</s-text>
+          </s-stack>
+        ) : state.status !== 'loading' && items.length === 0 ? (
+          <s-stack direction="block" gap="small-200">
+            <s-text type="strong">{state.status === 'error' ? COPY.subscriptions.errorTitle : COPY.subscriptions.emptyTitle}</s-text>
+            <s-paragraph color="subdued">{COPY.subscriptions.emptyBody}</s-paragraph>
+          </s-stack>
         ) : null}
       </s-stack>
     </s-section>

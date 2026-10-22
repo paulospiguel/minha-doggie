@@ -37,7 +37,7 @@ O `extensions/minha-doggie/shopify.extension.toml` **não vem no pacote** (não 
 |---|---|---|
 | Boas-vindas | Título da página "Olá, [primeiro nome]!" com o nome real do cliente autenticado (sem nome → "Olá!"), subtítulo "Esta é a tua área DOGGIE.", texto "Tudo o que precisas para cuidar de quem te faz mais feliz.", botões **Gerir perfil** (perfil nativo) e **Voltar a comprar** (loja), imagem opcional configurável | ✅ |
 | Os meus companheiros | Listar, **adicionar**, **editar** e **remover com confirmação** cães e gatos (nome, espécie, raça, idade aproximada em anos ou meses). Guardado num metafield do cliente (`$app:pets`, JSON). Validação, estados vazio/erro, controlo de concorrência | ✅ |
-| Subscrições | Secção discreta. Sem dados inventados. Ligação "Gerir subscrição ›" só se o lojista configurar o URL HTTPS da app de subscrições; caso contrário, estado vazio | ✅ (integração real com a app de subscrições: pendente) |
+| Subscrições | Secção discreta. Sem dados inventados. Ligação "Gerir subscrição ›" só se o lojista configurar o URL HTTPS da app de subscrições; caso contrário, instruções para abrir o portal pelo email de confirmação. Falhas de leitura são apresentadas como indisponibilidade | ✅ (integração real com a app de subscrições: pendente) |
 | Últimas encomendas | Até 3 encomendas reais (miniatura do 1.º artigo, número, data, total em €, estado, link para o detalhe nativo) + "Ver todas ›". Estados de carregamento, vazio e erro isolado | ✅ |
 | Ações rápidas | Mosaicos: Ver encomendas (histórico, onde está o "Comprar novamente" nativo) · Atualizar morada · Adicionar companheiro (navegação/ação reais) | ✅ |
 | Índices de segmentação | Cada gravação de companheiros (cliente ou admin) atualiza `$app:pet_species` e `$app:pet_count` na mesma chamada atómica | ✅ v1.2 |
@@ -47,7 +47,11 @@ O `extensions/minha-doggie/shopify.extension.toml` **não vem no pacote** (não 
 | **Admin** · Lista de clientes › seleção › Minha DOGGIE | Exportar CSV só dos clientes selecionados | ✅ v1.2 |
 
 ### Pendentes / fora da V1
-- Integração de dados com a app de subscrições instalada (hoje: só ligação configurável).
+- Integração de dados com a app de subscrições instalada: a Customer Account API só permite ler contratos pertencentes à app que os criou. Os contratos de **Shopify Subscriptions** não ficam acessíveis à Minha DOGGIE por adicionar scopes. Uma resposta vazia não significa que o cliente não tem subscrições.
+
+Para ligar **Shopify Subscriptions**, adiciona a página **Subscription management** no editor de checkout e contas (Apps → Subscriptions → Subscription management → Accounts), guarda e copia o URL da página publicada para a definição **Gestão de subscrições (URL HTTPS)** da Minha DOGGIE. O botão «Gerir subscrição» abre esse portal, mesmo quando a leitura dos contratos falha. Por omissão, a Minha DOGGIE usa o portal publicado desta loja, verificado em 22/10/2026: https://account.doggie.pt/pages/6971b1a1-27f6-4c27-b8b0-3009fd3b921d/subscriptions. Um URL HTTPS configurado substitui este destino. Se a página for recriada, atualiza o URL.
+
+Referências: [configurar a página de gestão](https://help.shopify.com/en/manual/products/purchase-options/subscriptions/shopify-subscriptions/setup), [scopes e propriedade dos contratos](https://shopify.dev/docs/api/usage/access-scopes).
 - Fotografias dos animais, data de nascimento exata, alergias/alimentação.
 - Tradução para espanhol (o texto está centralizado em `src/copy.ts`, pronto a extrair para `locales/`).
 - Testes numa loja de desenvolvimento (ver §7), incluindo as ferramentas de admin (§10).
@@ -194,7 +198,7 @@ npm run check          # tudo acima exceto o build da CLI
 3. No painel da extensão, preencher as definições:
    - **Imagem de boas-vindas (URL HTTPS)** — as extensões **não podem incluir imagens no bundle**, por isso a imagem por omissão é entregue como ficheiro: carregar `docs/assets/hero-pets-exemplo.png` (ou, melhor, uma fotografia oficial com direitos de uso, proporção **2:1, ≥ 1600×800 px**) em **Conteúdo → Ficheiros**, copiar o URL `https://cdn.shopify.com/...` e colá-lo aqui. Opcional: sem URL o hero mostra só o texto.
    - **Texto alternativo da imagem** (opcional).
-   - **Gestão de subscrições (URL HTTPS)** — URL oficial do portal da app de subscrições; vazio = estado vazio.
+   - **Gestão de subscrições (URL HTTPS)** — URL oficial do portal da app de subscrições; vazio = portal oficial Shopify Subscriptions da DOGGIE.
    - **Loja** — por omissão `https://store.doggie.pt`.
 4. **Guardar/Publicar** a personalização.
 5. (Opcional) Atalho na loja: em **Conteúdo → Menus**, adicionar ao menu pretendido o URL da página copiado do editor. Não alterar o código do tema.

@@ -98,6 +98,7 @@ export function toOrderSummary(order: OrderNode): OrderSummary {
   const status = orderStatus(order);
   const thumbnail = orderThumbnail(order);
   return {
+    productTitle: truncate(sanitizeText(order.lineItems?.nodes?.[0]?.title ?? ''), 160),
     id: order.id,
     name: order.name,
     dateLabel: formatOrderDate(order.processedAt),

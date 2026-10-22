@@ -9,6 +9,8 @@ export interface MockState {
   orders: unknown[];
   bannerValue?: string | null;
   ordersError?: boolean;
+  subscriptions?: unknown[];
+  subscriptionsError?: boolean;
   customerError?: boolean;
   userErrors?: Array<{field: string[]; message: string; code: string}>;
   /** Índices gravados no último metafieldsSet (pet_count / pet_species). */
@@ -44,6 +46,10 @@ export function createApiMock(state: MockState) {
           },
         },
       });
+    }
+    if (body.query.includes('query MinhaDoggieSubscriptions')) {
+      if (state.subscriptionsError) return json({errors: [{message: 'Access denied for subscriptionContracts field.'}]});
+      return json({data: {customer: {subscriptionContracts: {nodes: state.subscriptions ?? []}}}});
     }
     if (body.query.includes('query MinhaDoggieRecentOrders')) {
       if (state.ordersError) return json({errors: [{message: 'Access denied for orders field.'}]});
